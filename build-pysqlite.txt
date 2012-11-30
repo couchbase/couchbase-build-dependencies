@@ -1,0 +1,5 @@
+* centos 64-bit
+mkdir -p /opt/couchbase/lib/python
+python2.6 setup.py config -I /opt/couchbase/include -L /opt/couchbase/lib build
+cd build/lib* && tar czf pysqlite2.tar pysqlite2
+mv pysqlite2.tar /opt/couchbase/lib/python

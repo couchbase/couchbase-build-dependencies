@@ -1,0 +1,41 @@
+* mac 64-bit 10.7
+curl -O http://curl.haxx.se/download/curl-7.21.4.tar.gz
+tar -xvf curl-7.21.4.tar.gz
+cd curl-7.21.4
+./configure --prefix=/opt/couchbase --without-ssl --disable-shared --disable-ldap --disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+
+* centos 64-bit 5
+wget http://curl.haxx.se/download/curl-7.21.4.tar.gz
+tar -xvf curl-7.21.4.tar.gz
+cd curl-7.21.4
+wget https://github.com/downloads/libevent/libevent/libevent-2.0.11-stable.tar.gz
+./configure --prefix=/opt/couchbase --disable-openssl
+disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+tar -zcvf centos-5-x86-64-curl-7.21.4.tar.gz /opt/couchbase/
+* centos 32-bit 5
+disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+tar -zcvf centos-5-x86-curl-7.21.4.tar.gz /opt/couchbase/
+* ubuntu 64-bit 10.04
+disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+tar -zcvf ubuntu-10-04-x86-64-curl-7.21.4.tar.gz /opt/couchbase/
+* ubuntu 32-bit 10.04
+disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+tar -zcvf ubuntu-10-04-x86-curl-7.21.4.tar.gz /opt/couchbase/
+* windows 64-bit 
+curl -O http://curl.haxx.se/download/curl-7.21.4.tar.gz
+tar -xvf curl-7.21.4.tar.gz
+cd curl-7.21.4
+./configure --prefix=/opt/couchbase --without-ssl --disable-shared --disable-ldap --disable-ldaps --without-libidn
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+tar -zcvf win-2k8-x86-64-curl-7.21.4.tar.gz /opt/couchbase/

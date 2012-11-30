@@ -1,0 +1,29 @@
+* mac 64-bit 10.7
+git clone git://github.com/couchbase/snappy
+cd snappy
+git reset --hard 5681dde156e9d07adbeeab79666c9a9d7a10ec95
+./configure --prefix=/opt/couchbase
+make LDFLAGS=" -no-undefined"
+make install
+tar -zcvf tar -zcvf centos-5-x86-64-snappy-894be7.tar.gz /opt/couchbase/
+* centos 64-bit 5
+git clone git://github.com/couchbase/snappy
+cd snappy
+git reset --hard 5681dde156e9d07adbeeab79666c9a9d7a10ec95
+./configure --prefix=/opt/couchbase
+make LDFLAGS=" -no-undefined"
+make install
+tar -zcvf tar -zcvf centos-5-x86-64-snappy-894be7.tar.gz /opt/couchbase/
+* centos 32-bit 5
+./configure --prefix=/opt/couchbase
+make LDFLAGS=" -no-undefined"
+make install
+* ubuntu 64-bit 10.04
+./configure --prefix=/opt/couchbase
+make LDFLAGS=" -no-undefined"
+make install
+* ubuntu 32-bit 10.04
+./configure --prefix=/opt/couchbase
+make LDFLAGS=" -no-undefined"
+make install
+

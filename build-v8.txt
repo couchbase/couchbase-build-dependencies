@@ -1,0 +1,7 @@
+git clone git://github.com/couchbase/v8
+git checkout 3.9.7
+scons -j 8 arch=x86_64 mode=release snapshot=on library=shared visibility=default
+cp libv8.* /opt/couchbase/lib
+cp include/* /opt/couchbase/include
+echo "447decb75060a106131ab4de934bcc374648e7f2" > /opt/couchbase/lib/libv8.ver
+tar -zcvf centos-5-x86-64-curl-7.21.4.tar.gz /opt/couchbase/

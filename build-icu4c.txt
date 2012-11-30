@@ -1,0 +1,7 @@
+* mac 64-bit
+git clone git://github.com/couchbase/icu4c
+cd icu4c
+cd source && ./configure "--prefix=/opt/couchbase
+cd ..
+make -C source install
+tar -zcvf centos-10-7-x86-64-icu4c-894be7.tar.gz /opt/couchbase/

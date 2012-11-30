@@ -1,0 +1,50 @@
+* mac 64-bit 10.7
+
+git apply 0001-disable-usage-of-futex-syscall.patch
+git apply otp_R14B02-ssl-server.patch
+LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf 
+touch lib/wx/SKIP lib/megaco/SKIP
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
+				--disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+* centos 64-bit 5
+git apply otp_R14B02-64bit.patch || true
+git apply 0001-disable-usage-of-futex-syscall.patch
+git apply otp_R14B02-ssl-server.patch
+LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf \
+touch lib/wx/SKIP lib/megaco/SKIP
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
+				--disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+* centos 32-bit 5
+git apply otp_R14B02-64bit.patch || true
+git apply 0001-disable-usage-of-futex-syscall.patch
+git apply otp_R14B02-ssl-server.patch
+LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf \
+touch lib/wx/SKIP lib/megaco/SKIP
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
+				--disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+* ubuntu 64-bit 10.04
+git apply otp_R14B02-64bit.patch || true
+git apply 0001-disable-usage-of-futex-syscall.patch
+git apply otp_R14B02-ssl-server.patch
+LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf \
+touch lib/wx/SKIP lib/megaco/SKIP
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
+				--disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install
+* ubuntu 32-bit 10.04
+git apply otp_R14B02-64bit.patch || true
+git apply 0001-disable-usage-of-futex-syscall.patch
+git apply otp_R14B02-ssl-server.patch
+LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf \
+touch lib/wx/SKIP lib/megaco/SKIP
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
+				--disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib make
+LD_RUN_PATH=/opt/couchbase/lib make install

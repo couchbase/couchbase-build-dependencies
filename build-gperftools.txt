@@ -1,0 +1,50 @@
+* mac 64-bit 10.7
+wget http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf mac-10-07-x86-64-gperftools-2.0.tar.gz /opt/couchbase/
+* centos 64-bit 5
+wget http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf centos-5-x86-64-gperftools-2.0.tar.gz /opt/couchbase/
+* centos 32-bit 5
+wget http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf centos-5-x86-64-gperftools-2.0.tar.gz /opt/couchbase/
+* ubuntu 64-bit 10.04
+wget http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf ubuntu-10-04-x86-64-gperftools-2.0.tar.gz /opt/couchbase/
+* ubuntu 32-bit 10.04
+wget http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf ubuntu-10-04-x86-gperftools-2.0.tar.gz /opt/couchbase/
+* windows 64-bit 2008
+curl -O http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
+tar -xvf gperftools-2.0.tar.gz
+cd gperftools-2.0
+./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+make libtcmalloc_minimal.la
+make install-exec-am install-data-am
+tar -zcvf ubuntu-10-04-x86-gperftools-2.0.tar.gz /opt/couchbase/
+
+
