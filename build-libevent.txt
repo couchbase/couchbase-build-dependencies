@@ -38,7 +38,7 @@ tar -zcvf ubuntu-10-04-x86-libevent-2.0.11-stable.tar.gz /opt/couchbase/
 wget https://github.com/downloads/libevent/libevent/libevent-2.0.11-stable.tar.gz
 tar -xvf libevent-2.0.11-stable.tar.gz
 cd libevent-2.0.11-stable
-./configure --prefix=/opt/couchbase --disable-openssl
+./configure --prefix=/opt/couchbase --disable-openssl --host=x86_64-w64-mingw32 --enable-shared --disable-static
 make
 make install
-tar -zcvf win-sk8-x86-64-libevent-2.0.11-stable.tar.gz /opt/couchbase/
+tar -zcvf win-2k8-x86-64-libevent-2.0.11-stable.tar.gz /opt/couchbase/

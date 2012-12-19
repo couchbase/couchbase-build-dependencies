@@ -42,7 +42,9 @@ tar -zcvf ubuntu-10-04-x86-gperftools-2.0.tar.gz /opt/couchbase/
 curl -O http://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
 tar -xvf gperftools-2.0.tar.gz
 cd gperftools-2.0
-./configure --prefix=/opt/couchbase --disable-static --enable-minimal CXXFLAGS=-DTCMALLOC_SMALL_BUT_SLOW
+./configure --prefix=/opt/couchbase --host=x86_64-w64-mingw32 --disable-static --enable-shared \
+             --enable-minimal --disable-debugalloc --disable-dependency-tracking \
+             --disable-cpu-profiler --disable-heap-checker --disable-heap-profiler
 make libtcmalloc_minimal.la
 make install-exec-am install-data-am
 tar -zcvf ubuntu-10-04-x86-gperftools-2.0.tar.gz /opt/couchbase/

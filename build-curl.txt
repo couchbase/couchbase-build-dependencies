@@ -35,7 +35,7 @@ tar -zcvf ubuntu-10-04-x86-curl-7.21.4.tar.gz /opt/couchbase/
 curl -O http://curl.haxx.se/download/curl-7.21.4.tar.gz
 tar -xvf curl-7.21.4.tar.gz
 cd curl-7.21.4
-./configure --prefix=/opt/couchbase --without-ssl --disable-shared --disable-ldap --disable-ldaps --without-libidn
+./configure --prefix=/opt/couchbase --without-ssl --disable-shared --disable-ldap --disable-ldaps --without-libidn --host=x86_64-w64-mingw32 --enable-shared --disable-static
 LD_RUN_PATH=/opt/couchbase/lib make
 LD_RUN_PATH=/opt/couchbase/lib make install
 tar -zcvf win-2k8-x86-64-curl-7.21.4.tar.gz /opt/couchbase/

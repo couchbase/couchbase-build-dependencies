@@ -5,3 +5,37 @@ cp libv8.* /opt/couchbase/lib
 cp include/* /opt/couchbase/include
 echo "447decb75060a106131ab4de934bcc374648e7f2" > /opt/couchbase/lib/libv8.ver
 tar -zcvf centos-5-x86-64-curl-7.21.4.tar.gz /opt/couchbase/
+
+
+
+
+import sys
+sys.path.append("lib")
+sys.path.append(".")
+from mc_bin_client import MemcachedClient
+client_source = MemcachedClient("localhost", 11511)
+for i in range (100000):
+	x = client_source.set("couchbase%d"%i, 1000+i, 100000+i, "nosql")
+
+client_source = MemcachedClient("localhost", 11211)
+for i in range (100000):
+	x = client_source.set("couchbase%d"%i, 1000+i, 100000+i, "nosql")
+
+client_source = MemcachedClient("localhost", 11211)
+	x = client_source.set("couchbase%d"%i, 1000+i, 100000+i, "nosql")
+#Then we put some items with unique flags into the cluster
+
+for i in range (100000):
+   try:
+      a,b,c = client_source.get("couchbase%d"%i)
+      if a != 100000+i:
+         print "flags mismatch for %s " % ("couchbase%d"%i),a,
+         break
+      if c != "nosql":
+         print "value mismatch ",c,
+         break
+   except:
+      print "couchbase%d"%i,
+          
+   
+   x = client_source.set("couchbase%d"%i, 1000+i, 100000+i, "nosql")

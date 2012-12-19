@@ -26,4 +26,10 @@ make install
 ./configure --prefix=/opt/couchbase
 make LDFLAGS=" -no-undefined"
 make install
-
+* windows 64-bit 2k8
+git clone git://github.com/couchbase/snappy
+cd snappy
+git reset --hard 5681dde156e9d07adbeeab79666c9a9d7a10ec95
+./configure --prefix=/opt/couchbase --host=x86_64-w64-mingw32 --enable-shared --disable-static
+make LDFLAGS=" -no-undefined"
+make install

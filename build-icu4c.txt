@@ -5,3 +5,5 @@ cd source && ./configure "--prefix=/opt/couchbase
 cd ..
 make -C source install
 tar -zcvf centos-10-7-x86-64-icu4c-894be7.tar.gz /opt/couchbase/
+* windows 64-bit
+
