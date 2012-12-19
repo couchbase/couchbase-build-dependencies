@@ -92,7 +92,7 @@ class DependenyResolver(object):
             info['os'] = 'windows'
             if os_string.find('32-bit') >= 0:
                 info['arch'] = 'x86'
-            elif os_string.find('WOW64') >= 0:
+            elif os_string.find('wow64') >= 0:
                 info['arch'] = 'x86_64'
         return info
 
@@ -136,8 +136,11 @@ class DependenyResolver(object):
         tar.close()
 
     def _extract_windows(self, file, destination):
-        # use zip command
-        pass
+        ConsoleLogger.info('extracting %s to %s' % (file, destination))
+        os.chdir(destination)
+        tar = tarfile.open(file)
+        tar.extractall()
+        tar.close()
 
     def _extract_linux(self, file, destination):
         # use zip command
@@ -171,6 +174,3 @@ class DependenyResolver(object):
                 if version_match: 
                     return d
         return best_match
-        
-
-
