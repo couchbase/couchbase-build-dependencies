@@ -143,8 +143,11 @@ class DependenyResolver(object):
         tar.close()
 
     def _extract_linux(self, file, destination):
-        # use zip command
-        pass
+        ConsoleLogger.info('extracting %s to %s' % (file, destination))
+        os.chdir(destination)
+        tar = tarfile.open(file)
+        tar.extractall()
+        tar.close()
 
     def extract(self, dependency, destination):
         machine = self._get_os_info()
@@ -158,15 +161,41 @@ class DependenyResolver(object):
         else:
             #raise NotSupportedPlatformException()
             return None
-            
+
+    def __decode_list(self, data):
+        rv = []
+        for item in data:
+            if isinstance(item, unicode):
+                item = item.encode('utf-8')
+            elif isinstance(item, list):
+                item = self.__decode_list(item)
+            elif isinstance(item, dict):
+                item = self._decode_dict(item)
+            rv.append(item)
+        return rv
+
+    def __decode_dict(self, data):
+        rv = {}
+        for key, value in data.iteritems():
+            if isinstance(key, unicode):
+                key = key.encode('utf-8')
+            if isinstance(value, unicode):
+                value = value.encode('utf-8')
+            elif isinstance(value, list):
+                value = self.__decode_list(value)
+            elif isinstance(value, dict):
+                value = self.__decode_dict(value)
+            rv[key] = value
+        return rv    
+
     def _parse_dependencies(self, dependencies):
         os_info = self._get_os_info()
-        dj = json.loads(dependencies)
+        dj = json.loads(dependencies, object_hook=self.__decode_dict)
         #if os and arch match and we can't find a version
         #match let's use that
         best_match = None
         for d in dj:
-            os_match = d['os'] == os_info['os']
+            os_match = d['os'] == os_info['os'] or d['os'] == os_info['distribution']
             version_match = 'version' in os_info and (d['version'] == os_info['version'])
             arch_match = d['arch'] == os_info['arch']
             if os_match and arch_match:
