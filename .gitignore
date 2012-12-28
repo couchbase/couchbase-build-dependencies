@@ -1,0 +1,10 @@
+[#]*
+*.pyc
+*~
+*.DS_*
+*.idea
+*.log
+*.log.*
+dist/
+logs/
+tmp*
