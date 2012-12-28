@@ -1,0 +1,13 @@
+diff --git a/lib/ssl/src/ssl_server.erl b/lib/ssl/src/ssl_server.erl
+index b66e20a..4a5e6d9 100644
+--- a/lib/ssl/src/ssl_server.erl
++++ b/lib/ssl/src/ssl_server.erl
+@@ -271,7 +271,7 @@ init([]) ->
+ 		find_priv_bin()
+ 	end,
+     {Program, Flags} = mk_cmd_line("ssl_esock"),
+-    Cmd = filename:join(ProgDir, Program) ++ " " ++ Flags,
++    Cmd = "'" ++ filename:join(ProgDir, Program) ++ "' " ++ Flags,
+     debug1(Debug, " start, Cmd =  ~s~n", [Cmd]), 
+     case (catch open_port({spawn, Cmd}, [binary, {packet, 4}])) of
+ 	Port when is_port(Port) ->

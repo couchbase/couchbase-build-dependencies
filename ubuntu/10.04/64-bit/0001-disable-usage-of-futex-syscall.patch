@@ -1,0 +1,26 @@
+From a477c5a928af4738ba6f2b5902e4c729ab89f191 Mon Sep 17 00:00:00 2001
+From: Aliaksey Kandratsenka <alk@tut.by>
+Date: Mon, 11 Apr 2011 18:32:56 -0700
+Subject: [PATCH] disable usage of futex syscall
+
+It doesn't work on older kernels (i.e. rhel 5)
+---
+ erts/include/internal/pthread/ethr_event.h |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/erts/include/internal/pthread/ethr_event.h b/erts/include/internal/pthread/ethr_event.h
+index 4c29b28..429257e 100644
+--- a/erts/include/internal/pthread/ethr_event.h
++++ b/erts/include/internal/pthread/ethr_event.h
+@@ -21,7 +21,7 @@
+  * Author: Rickard Green
+  */
+ 
+-#if defined(ETHR_HAVE_LINUX_FUTEX) && defined(ETHR_HAVE_NATIVE_ATOMICS)
++#if 0 && defined(ETHR_HAVE_LINUX_FUTEX) && defined(ETHR_HAVE_NATIVE_ATOMICS)
+ /* --- Linux futex implementation of ethread events ------------------------- */
+ #define ETHR_LINUX_FUTEX_IMPL__
+ 
+-- 
+1.7.4.1
+
