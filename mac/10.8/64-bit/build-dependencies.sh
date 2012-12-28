@@ -1,7 +1,7 @@
 #building all of the required dependencies for ubuntu 64-bit
 # curl , libevent, v8, icu4c, gperftools, snappy and erlang otp
 currentdir=`pwd`
-rm -rf curl-7.21.4
+rm -rf curl-7.21.4*
 rm -rf /opt/couchbase/*
 curl -O http://curl.haxx.se/download/curl-7.21.4.tar.gz
 tar -xvf curl-7.21.4.tar.gz
@@ -25,9 +25,11 @@ cp centos-5-x86-64-libevent-2.0.11-stable.tar.gz $currentdir/
 cd $currentdir
 rm -rf /opt/couchbase/*
 rm -rf v8
+mkdir -p /opt/couchbase/lib
+mkdir -p /opt/couchbase/include
 git clone git://github.com/couchbase/v8
 git checkout 3.9.7
-scons -j 8 arch=x86_64 mode=release snapshot=on library=shared visibility=default
+scons -j 8 arch=x64 mode=release snapshot=on library=shared visibility=default
 cp libv8.* /opt/couchbase/lib
 cp include/* /opt/couchbase/include
 echo "447decb75060a106131ab4de934bcc374648e7f2" > /opt/couchbase/lib/libv8.ver

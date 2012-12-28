@@ -1,9 +1,9 @@
 #building all of the required dependencies for ubuntu 64-bit
 # curl , libevent, v8, icu4c, gperftools, snappy and erlang otp
 currentdir=`pwd`
-rm -rf curl-7.21.4
+rm -rf curl-7.21.4*
 rm -rf /opt/couchbase/*
-curl -O http://curl.haxx.se/download/curl-7.21.4.tar.gz
+wget  http://curl.haxx.se/download/curl-7.21.4.tar.gz
 tar -xvf curl-7.21.4.tar.gz
 cd curl-7.21.4
 ./configure --prefix=/opt/couchbase --without-ssl --disable-shared --disable-ldap --disable-ldaps --without-libidn CFLAGS="-O2 -g"
@@ -25,9 +25,11 @@ cp centos-5-x86-libevent-2.0.11-stable.tar.gz $currentdir/
 cd $currentdir
 rm -rf /opt/couchbase/*
 rm -rf v8
+mkdir -p /opt/couchbase/lib
+mkdir -p /opt/couchbase/include
 git clone git://github.com/couchbase/v8
 git checkout 3.9.7
-scons -j 8 arch=ia32 mode=release snapshot=on library=shared visibility=default
+scons -j 8 arch=xia32 mode=release snapshot=on library=shared visibility=default
 cp libv8.* /opt/couchbase/lib
 cp include/* /opt/couchbase/include
 echo "447decb75060a106131ab4de934bcc374648e7f2" > /opt/couchbase/lib/libv8.ver
@@ -120,8 +122,7 @@ git apply 0001-disable-usage-of-futex-syscall.patch
 git apply otp_R14B02-ssl-server.patch
 LD_RUN_PATH=/opt/couchbase/lib ./otp_build autoconf
 touch lib/wx/SKIP lib/megaco/SKIP
-LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support \
---disable-hipe --disable-fp-exceptions --enable-darwin-64bit CFLAGS="-O2 -g  -DNO_JUMP_TABLE"
+LD_RUN_PATH=/opt/couchbase/lib ./configure --prefix=/opt/couchbase --enable-smp-support --disable-hipe --disable-fp-exceptions CFLAGS="-O2 -g"
 LD_RUN_PATH=/opt/couchbase/lib make
 LD_RUN_PATH=/opt/couchbase/lib make install
 tar -zcvf centos-5-x86-otp-OTP_R14B04.tar.gz /opt/couchbase
