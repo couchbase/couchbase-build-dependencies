@@ -1,0 +1,71 @@
+diff --git a/erts/emulator/drivers/common/efile_drv.c b/erts/emulator/drivers/common/efile_drv.c
+index f0ff3f5..eea95fb 100644
+--- a/erts/emulator/drivers/common/efile_drv.c
++++ b/erts/emulator/drivers/common/efile_drv.c
+@@ -341,6 +341,7 @@ struct t_data
+     Efile_error    errInfo;
+     int            flags;
+     SWord          fd;
++    int            is_fd_unused;
+     /**/
+     Efile_info        info;
+     EFILE_DIR_HANDLE  dir_handle; /* Handle to open directory. */
+@@ -664,11 +665,6 @@ file_start(ErlDrvPort port, char* command)
+     return (ErlDrvData) desc;
+ }
+ 
+-static void free_data(void *data)
+-{
+-    EF_FREE(data);
+-}
+-
+ static void do_close(int flags, SWord fd) {
+     if (flags & EFILE_COMPRESSED) {
+ 	erts_gzclose((gzFile)(fd));
+@@ -684,6 +680,17 @@ static void invoke_close(void *data)
+     do_close(d->flags, d->fd);
+ }
+ 
++static void free_data(void *data)
++{
++    struct t_data *d = (struct t_data *) data;
++
++    if (d->command == FILE_OPEN && d->is_fd_unused && d->fd != FILE_FD_INVALID) {
++        do_close(d->flags, d->fd);
++    }
++
++    EF_FREE(data);
++}
++
+ /*********************************************************************
+  * Driver entry point -> stop
+  */
+@@ -1685,6 +1692,9 @@ static void invoke_open(void *data)
+     }
+ 
+     d->result_ok = status;
++    if (!status) {
++        d->fd = FILE_FD_INVALID;
++    }
+ }
+ 
+ static void invoke_fadvise(void *data)
+@@ -2014,8 +2024,10 @@ file_async_ready(ErlDrvData e, ErlDrvThreadData data)
+ 	if (!d->result_ok) {
+ 	    reply_error(desc, &d->errInfo);
+ 	} else {
++	    ASSERT(d->is_fd_unused);
+ 	    desc->fd = d->fd;
+ 	    desc->flags = d->flags;
++	    d->is_fd_unused = 0;
+ 	    reply_Uint(desc, d->fd);
+ 	}
+ 	free_data(data);
+@@ -2279,6 +2291,7 @@ file_output(ErlDrvData e, char* buf, int count)
+ 	    d->invoke = invoke_open;
+ 	    d->free = free_data;
+ 	    d->level = 2;
++	    d->is_fd_unused = 1;
+ 	    goto done;
+ 	}
+ 
